@@ -13,7 +13,7 @@ class EventFactory extends Factory
         return [
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph,
-            'date' => $this->faker->dateTimeBetween('now', '+1 year'),
+            'event_date' => $this->faker->dateTimeBetween('now', '+1 year'),
         ];
     }
 }
