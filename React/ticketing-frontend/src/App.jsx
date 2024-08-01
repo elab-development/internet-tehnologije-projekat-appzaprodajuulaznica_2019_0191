@@ -2,13 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 
-// Import your components
-//import SignUp from './SignUp';
 import AdminPage from './pages/AdminPage';
 import Home from './pages/Home';
-// Placeholder components for other pages
-const SignUp = () => <h1>Sign up</h1>;
-const Login = () => <h1>Login Page</h1>;
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+
 
 const App = () => {
   return (
