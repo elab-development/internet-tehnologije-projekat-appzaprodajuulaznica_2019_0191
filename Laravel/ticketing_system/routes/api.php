@@ -20,7 +20,14 @@ use App\Http\Controllers\AuthController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('events', [EventController::class, 'index']);
+Route::get('adminevents', [EventController::class, 'adminIndex']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('events/{id}', [EventController::class, 'show']);
+Route::post('events/{id}/tickets', [EventController::class, 'addTicket']);
+Route::put('events/{id}', [EventController::class, 'update']);
+Route::delete('events/{id}', [EventController::class, 'destroy']);
+Route::post('events', [EventController::class, 'store']);
+
 
 
 Route::middleware('auth:sanctum')->group(function () {
