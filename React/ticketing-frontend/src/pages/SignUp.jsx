@@ -9,13 +9,13 @@ import {
   Link
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import http from '../utils/http';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -29,18 +29,27 @@ const SignUp = () => {
     tempErrors.name = formData.name ? "" : "Name is required";
     tempErrors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ? "" : "Email is not valid";
     tempErrors.password = formData.password.length >= 6 ? "" : "Password must be at least 6 characters";
-    tempErrors.confirmPassword = formData.password === formData.confirmPassword ? "" : "Passwords do not match";
     setErrors(tempErrors);
     return Object.values(tempErrors).every(x => x === "");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // slanje na back
-      console.log('Form data:', formData);
-      // Reset forme
-      setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+    try {
+      if(validateForm()){
+      const response = await http.post('/api/register', formData);
+      if (response.data.success) {
+        // Redirect to home page or dashboard
+        console.log("success");
+      }}
+    } catch (error) {
+      if (error.response && error.response.data) {
+        // Handle validation errors
+        console.error('Registration failed:', error.response.data);
+        // You can set error messages in state here to display them in the UI
+      } else {
+        console.error('An unexpected error occurred:', error);
+      }
     }
   };
 
@@ -101,19 +110,6 @@ const SignUp = () => {
             onChange={handleChange}
             error={!!errors.password}
             helperText={errors.password}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="confirmPassword"
-            label="Confirm Password"
-            type="password"
-            id="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword}
           />
           <Button
             type="submit"
