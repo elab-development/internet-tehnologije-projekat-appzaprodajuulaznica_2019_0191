@@ -6,6 +6,9 @@ import TicketDialog from '../components/TicketDialog';
 import EditEventDialog from '../components/EditEventDialog';
 import AdminUserCreate from '../components/AdminUserCreate';
 import http from '../utils/http';
+import { useAuth } from '../services/AuthContext';
+import { useNavigate } from "react-router-dom";
+
 
 const AdminPage = () => {
   const [events, setEvents] = useState([]);
@@ -14,6 +17,20 @@ const AdminPage = () => {
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [tabValue, setTabValue] = useState(0);
+  const { user, isAuthenticated, checkAuth } = useAuth();
+  const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            checkAuth().then(auth => {
+                if (!auth || user.isAdmin !== 1) {
+                    navigate('/login');
+                }
+            });
+        } else if (user.isAdmin !== 1) {
+            navigate('/login');
+        }
+    }, [isAuthenticated, checkAuth, navigate, user]);
 
   const getEvents = async () => {
     try {
