@@ -12,7 +12,7 @@ class TicketTypeFactory extends Factory
     {
         return [
             'event_id' => \App\Models\Event::factory(),
-            'type' => $this->faker->randomElement(['VIP', 'Standard', 'General']),
+            'type' => $this->faker->randomElement(['VIP', 'REGULAR', 'GENERAL']),
             'price' => $this->faker->randomFloat(2, 10, 500),
             'quantity' => $this->faker->numberBetween(50, 200),
         ];

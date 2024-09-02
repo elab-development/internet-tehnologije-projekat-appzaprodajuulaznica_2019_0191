@@ -21,12 +21,6 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
             TicketSeeder::class,         
         ]);
-
-        Role::create(['name' => 'guest']);
-        Role::create(['name' => 'user']);
-        Role::create(['name' => 'admin']);
-
-        User::find(1)->roles()->attach(3);
         
     }
 }

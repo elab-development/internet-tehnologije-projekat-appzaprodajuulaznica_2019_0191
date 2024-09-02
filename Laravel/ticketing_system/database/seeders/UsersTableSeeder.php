@@ -16,32 +16,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::create([
+        User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('admin123'), // Ensure a strong password for production
+            'is_admin' => true,
         ]);
 
-        $authenticatedUser = User::create([
-            'name' => 'Authenticated User',
-            'email' => 'user@example.com',
-            'password' => Hash::make('password')
-        ]);
+        // Create 50 dummy users
+        User::factory()->count(50)->create();
+}
 
-        $guest = User::create([
-            'name' => 'Guest User',
-            'email' => 'guest@example.com',
-            'password' => Hash::make('password')
-        ]);
-
-        $adminRole = Role::where('name', 'admin')->first();
-        $userRole = Role::where('name', 'authenticated_user')->first();
-        $guestRole = Role::where('name', 'guest')->first();
-
-        $admin->roles()->attach($adminRole);
-        $authenticatedUser->roles()->attach($userRole);
-        $guest->roles()->attach($guestRole);
-
-        User::factory()->count(10)->create();
-    }
 }
