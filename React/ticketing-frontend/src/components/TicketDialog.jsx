@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Button, MenuItem } from '@mui/material';
 
 const TicketDialog = ({ open, onClose, onTicketSubmit, eventId }) => {
-  const [ticket, setTicket] = useState({ type: '', price: '', quantity: ''});
+  const [ticket, setTicket] = useState({ type: '', price: '', quantity: '' });
 
   const handleChange = (e) => {
     setTicket({ ...ticket, [e.target.name]: e.target.value });
@@ -25,6 +25,7 @@ const TicketDialog = ({ open, onClose, onTicketSubmit, eventId }) => {
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
+            select
             fullWidth
             margin="normal"
             name="type"
@@ -32,7 +33,11 @@ const TicketDialog = ({ open, onClose, onTicketSubmit, eventId }) => {
             value={ticket.type}
             onChange={handleChange}
             required
-          />
+          >
+            <MenuItem value="VIP">VIP</MenuItem>
+            <MenuItem value="REGULAR">REGULAR</MenuItem>
+            <MenuItem value="GENERAL">GENERAL</MenuItem>
+          </TextField>
           <TextField
             fullWidth
             margin="normal"
