@@ -17,5 +17,6 @@ class RolesTableSeeder extends Seeder
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'authenticated_user']);
         Role::create(['name' => 'guest']);
+        
     }
 }

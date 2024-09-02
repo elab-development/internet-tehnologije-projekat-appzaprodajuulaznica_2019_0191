@@ -21,7 +21,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('events', [EventController::class, 'index']);
 Route::get('adminevents', [EventController::class, 'adminIndex']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 Route::get('events/{id}', [EventController::class, 'show']);
 Route::post('events/{id}/tickets', [EventController::class, 'addTicket']);
 Route::put('events/{id}', [EventController::class, 'update']);

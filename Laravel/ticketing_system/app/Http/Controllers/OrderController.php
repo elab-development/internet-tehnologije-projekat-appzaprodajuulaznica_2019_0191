@@ -29,7 +29,6 @@ class OrderController extends Controller
 
         $order = Order::create($request->all());
 
-        // Decrease the quantity of available tickets
         $ticketType->quantity -= $request->quantity;
         $ticketType->save();
 

@@ -49,7 +49,7 @@ class AuthController extends Controller
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            //'isAdmin' => $user->isAdmin, // Assuming you have an isAdmin field
+            //'isAdmin' => $user->isAdmin,
         ]
     ]);
 }
