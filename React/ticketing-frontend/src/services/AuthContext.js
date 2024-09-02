@@ -34,24 +34,25 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      delete http.defaults.headers.common['Authorization'];
+      window.location.replace('/login')
+      // delete http.defaults.headers.common['Authorization'];
     }
   };
 
-  // const checkAuth = async () => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     try {
-  //       const response = await http.get('/api/user');
-  //       setUser(response.data);
-  //       setIsAuthenticated(true);
-  //       localStorage.setItem('user', JSON.stringify(response.data));
-  //     } catch (error) {
-  //       console.error('Error checking auth:', error);
-  //       logout();
-  //     }
-  //   }
-  // };
+  const checkAuth = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await http.get('/api/user');
+        setUser(response.data);
+        setIsAuthenticated(true);
+        localStorage.setItem('user', JSON.stringify(response.data));
+      } catch (error) {
+        console.error('Error checking auth:', error);
+        logout();
+      }
+    }
+   };
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, login, logout, checkAuth }}>
