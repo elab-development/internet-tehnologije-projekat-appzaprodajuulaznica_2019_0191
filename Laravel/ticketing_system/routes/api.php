@@ -20,20 +20,25 @@ use App\Http\Controllers\AuthController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('events', [EventController::class, 'index']);
-Route::get('adminevents', [EventController::class, 'adminIndex']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 Route::get('events/{id}', [EventController::class, 'show']);
-Route::post('events/{id}/tickets', [EventController::class, 'addTicket']);
-Route::put('events/{id}', [EventController::class, 'update']);
-Route::delete('events/{id}', [EventController::class, 'destroy']);
 Route::post('events', [EventController::class, 'store']);
-
-
+Route::get('user', [EventController::class, 'user']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('ticket-types', TicketTypeController::class);
     Route::apiResource('orders', OrderController::class);
+    Route::get('adminevents', [EventController::class, 'adminIndex']);
+    Route::post('events/{id}/tickets', [EventController::class, 'addTicket']);
+    Route::put('events/{id}', [EventController::class, 'update']);
+    Route::delete('events/{id}', [EventController::class, 'destroy']);
+    Route::post('/admin/register', [AuthController::class, 'registerAdmin'])->name('admin.register');
+    Route::get('/events/{event}/tickets', [TicketTypeController::class, 'index']);
+    Route::post('/events/{event}/tickets', [TicketTypeController::class, 'store']);
+    Route::get('/tickets/{ticket}', [TicketTypeController::class, 'show']);
+    Route::put('/tickets/{ticket}', [TicketTypeController::class, 'update']);
+    Route::delete('/tickets/{ticket}', [TicketTypeController::class, 'destroy']);
 });
 
 
