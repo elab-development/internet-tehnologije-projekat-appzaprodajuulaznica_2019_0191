@@ -38,20 +38,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const checkAuth = async () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const response = await http.get('/api/user'); // Assuming you have an endpoint to get user data
-        setUser(response.data);
-        setIsAuthenticated(true);
-        localStorage.setItem('user', JSON.stringify(response.data));
-      } catch (error) {
-        console.error('Error checking auth:', error);
-        logout();
-      }
-    }
-  };
+  // const checkAuth = async () => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     try {
+  //       const response = await http.get('/api/user');
+  //       setUser(response.data);
+  //       setIsAuthenticated(true);
+  //       localStorage.setItem('user', JSON.stringify(response.data));
+  //     } catch (error) {
+  //       console.error('Error checking auth:', error);
+  //       logout();
+  //     }
+  //   }
+  // };
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, login, logout, checkAuth }}>

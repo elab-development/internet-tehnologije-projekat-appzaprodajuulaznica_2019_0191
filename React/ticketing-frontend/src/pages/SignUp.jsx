@@ -38,15 +38,12 @@ const SignUp = () => {
     try {
       if(validateForm()){
       const response = await http.post('/api/register', formData);
-      if (response.data.success) {
-        // Redirect to home page or dashboard
+      if (response.data.success) {  
         console.log("success");
       }}
     } catch (error) {
       if (error.response && error.response.data) {
-        // Handle validation errors
-        console.error('Registration failed:', error.response.data);
-        // You can set error messages in state here to display them in the UI
+      console.error('Registration failed:', error.response.data);
       } else {
         console.error('An unexpected error occurred:', error);
       }
