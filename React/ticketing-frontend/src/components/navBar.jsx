@@ -2,17 +2,22 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import {Link} from 'react-router-dom';
 import { useAuth } from '../services/AuthContext';
+import http from '../utils/http';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <AppBar position="static">
       <Toolbar>
         {/* ... other buttons */}
         {user ? (
-          <>
-            <Button color="inherit" onClick={logout}>Logout</Button>
+          <><Button color="inherit" component={Link} to="/">Home</Button>
+            <Button color="inherit" onClick={handleLogout}>Logout</Button>
             {user.isAdmin && <Button color="inherit" component={Link} to="/admin">Admin</Button>}
           </>
         ) : (
