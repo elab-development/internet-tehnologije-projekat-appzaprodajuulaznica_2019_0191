@@ -1,73 +1,100 @@
-
-import { Box, Typography, Button, Grid, Card, CardContent, CardActions } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Button, Grid, Card, CardContent, CardActions, Pagination, Snackbar } from '@mui/material';
+import http from '../utils/http';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../services/AuthContext'; 
 
 const TicketSale = () => {
- 
+  const [events, setEvents] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
-  const tickets = [
-    {
-      title: "General Admission",
-      description: "Access to main event area",
-      fullDescription: "Enjoy the full event experience with access to all main stages and common areas. Perfect for those who want to be in the heart of the action.",
-      price: 50
-    },
-    {
-      title: "VIP Pass",
-      description: "Premium viewing areas and complimentary drinks",
-      fullDescription: "Get the VIP treatment with access to exclusive viewing areas, complimentary drinks, and special meet-and-greet opportunities with performers.",
-      price: 150
-    },
-    {
-      title: "Backstage Pass",
-      description: "All VIP benefits plus backstage tour",
-      fullDescription: "The ultimate event experience. Enjoy all VIP benefits and get a behind-the-scenes tour of the event. Limited availability.",
-      price: 300
-    },
-    {
-      title: "Backstage Pass",
-      description: "All VIP benefits plus backstage tour",
-      fullDescription: "The ultimate event experience. Enjoy all VIP benefits and get a behind-the-scenes tour of the event. Limited availability.",
-      price: 300
-    },
-    {
-      title: "Backstage Pass",
-      description: "All VIP benefits plus backstage tour",
-      fullDescription: "The ultimate event experience. Enjoy all VIP benefits and get a behind-the-scenes tour of the event. Limited availability.",
-      price: 300
+  useEffect(() => {
+    fetchEvents(currentPage);
+  }, [currentPage]);
+
+  const fetchEvents = async (page) => {
+    try {
+      const response = await http.get(`/api/events?page=${page}`);
+      setEvents(response.data.data);
+      setTotalPages(response.data.last_page);
+    } catch (error) {
+      console.error('Error fetching events:', error);
     }
-  ];
+  };
+
+  const handleBuyTicket = (eventId) => {
+    if (isAuthenticated) {
+      navigate(`/event/${eventId}`);
+    } else {
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        navigate('/signup', { state: { message: 'Please register or log in to buy tickets.' } });
+      }, 2000);
+    }
+  };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
-    <Box sx={{ maxWidth: 800, margin: 'auto', padding: 2 }}>
+    <Box sx={{ maxWidth: 1200, margin: 'auto', padding: 2 }}>
       <Typography variant="h4" gutterBottom>
         Event Ticket Sales
       </Typography>
       <Grid container spacing={2}>
-        {tickets.map((ticket, index) => (
-          <Grid item xs={12} sm={4} key={index}>
-            <Card sx={{ minHeight: 314 }}>
-              <CardContent>
+        {events.map((event) => (
+          <Grid item xs={12} sm={6} md={3} key={event.id}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h5" component="div">
-                  {ticket.title}
+                  {event.name}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {ticket.description}
+                  {new Date(event.event_date).toLocaleDateString()}
                 </Typography>
                 <Typography variant="body2">
-                  {ticket.fullDescription.slice(0, 100)}...
-                </Typography>
-                <Typography variant="h6" sx={{ mt: 2 }}>
-                  Price: ${ticket.price}
+                  {event.description.slice(0, 100)}...
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Show More</Button>
-                <Button size="small" variant="contained">Buy Now</Button>
+                <Button size="small" variant="contained" onClick={() => handleBuyTicket(event.id)}>
+                  Buy Ticket
+                </Button>
               </CardActions>
             </Card>
           </Grid>
         ))}
       </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Box>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={handleCloseSnackbar}
+        message="Please log in to buy tickets. Redirecting to registration page..."
+      />
     </Box>
   );
 };

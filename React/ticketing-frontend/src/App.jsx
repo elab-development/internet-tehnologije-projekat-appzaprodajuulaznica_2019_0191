@@ -7,7 +7,7 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Navbar from './components/NavBar';
 import { AuthProvider } from './services/AuthContext';
-import EventPage from './pages/EventPage'; // Import the EventPage component
+import EventPage from './pages/EventPage';
 
 const App = () => {
   return (
