@@ -5,7 +5,7 @@ import { useAuth } from '../services/AuthContext';
 import http from '../utils/http';
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -14,11 +14,11 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        {/* ... other buttons */}
         {user ? (
-          <><Button color="inherit" component={Link} to="/">Home</Button>
+          <>
+            <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" onClick={handleLogout}>Logout</Button>
-            {user.isAdmin && <Button color="inherit" component={Link} to="/admin">Admin</Button>}
+            {user.isAdmin === 1 && <Button color="inherit" component={Link} to="/admin">Admin</Button>}
           </>
         ) : (
           <>
