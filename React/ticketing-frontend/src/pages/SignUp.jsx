@@ -6,10 +6,13 @@ import {
   Button, 
   Container, 
   Avatar,
-  Link
+  Link,
+  Snackbar,
+  Alert
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import http from '../utils/http';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +22,13 @@ const SignUp = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,17 +47,38 @@ const SignUp = () => {
     e.preventDefault();
     try {
       if(validateForm()){
-      const response = await http.post('/api/register', formData);
-      if (response.data.success) {  
-        console.log("success");
-      }}
+        const response = await http.post('/api/register', formData);  
+          setNotification({
+            open: true,
+            message: 'Registration successful! You can now log in.',
+            severity: 'success',
+          });
+          setTimeout(() => navigate('/login'), 1500); // Redirect to login page after 1.5 seconds
+      }
     } catch (error) {
       if (error.response && error.response.data) {
-      console.error('Registration failed:', error.response.data);
+        console.error('Registration failed:', error.response.data);
+        setNotification({
+          open: true,
+          message: `Registration failed: ${error.response.data.message || 'Please try again.'}`,
+          severity: 'error',
+        });
       } else {
         console.error('An unexpected error occurred:', error);
+        setNotification({
+          open: true,
+          message: 'An unexpected error occurred. Please try again.',
+          severity: 'error',
+        });
       }
     }
+  };
+
+  const handleCloseNotification = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setNotification({ ...notification, open: false });
   };
 
   return (
@@ -121,6 +152,16 @@ const SignUp = () => {
           </Link>
         </Box>
       </Box>
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={handleCloseNotification}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseNotification} severity={notification.severity} sx={{ width: '100%' }}>
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
