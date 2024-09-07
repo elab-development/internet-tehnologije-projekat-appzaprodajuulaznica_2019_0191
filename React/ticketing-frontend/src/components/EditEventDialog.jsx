@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Box, Button } from '@mui/material';
+import FormTextField from './FormTextField';
 
 const EditEventDialog = ({ open, onClose, onEventUpdate, event }) => {
   const [editedEvent, setEditedEvent] = useState({
@@ -33,27 +34,21 @@ const EditEventDialog = ({ open, onClose, onEventUpdate, event }) => {
       <DialogTitle>Edit Event</DialogTitle>
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            margin="normal"
+          <FormTextField
             name="name"
             label="Event Name"
             value={editedEvent.name}
             onChange={handleChange}
             required
           />
-          <TextField
-            fullWidth
-            margin="normal"
+          <FormTextField
             name="description"
             label="Event Description"
             value={editedEvent.description}
             onChange={handleChange}
             required
           />
-          <TextField
-            fullWidth
-            margin="normal"
+          <FormTextField
             name="event_date"
             label="Event Date"
             type="date"
