@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobs\ProcessTicketPurchase;
 use App\Models\Event;
-use App\Models\TicketType;
+use App\Models\TicketType; 
 
 class EventController extends Controller
 {
@@ -74,5 +75,26 @@ class EventController extends Controller
         $event->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function purchaseTicket(Request $request, Event $event)
+    {
+    
+        $user = auth()->user();
+        $ticketType = TicketType::findOrFail($request->input('ticket_type_id'));
+        $quantity = $request->input('quantity');
+    
+        if ($ticketType->event_id !== $event->id) {
+            return response()->json(['error' => 'Invalid ticket type for this event'], 400);
+        }
+    
+        if ($ticketType->quantity < $quantity) {
+            return response()->json(['error' => 'Not enough tickets available'], 400);
+        }
+    
+        // Dispatch the purchase ticket job
+        ProcessTicketPurchase::dispatch($user, $ticketType, $quantity);
+    
+        return response()->json(['message' => 'Your ticket purchase is being processed.']);
     }
 }

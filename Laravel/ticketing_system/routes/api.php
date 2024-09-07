@@ -25,6 +25,7 @@ Route::get('events/{id}', [EventController::class, 'show']);
 Route::post('events', [EventController::class, 'store']);
 Route::get('user', [EventController::class, 'user']);
 
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('ticket-types', TicketTypeController::class);
@@ -39,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tickets/{ticket}', [TicketTypeController::class, 'show']);
     Route::put('/tickets/{ticket}', [TicketTypeController::class, 'update']);
     Route::delete('/tickets/{ticket}', [TicketTypeController::class, 'destroy']);
+    Route::post('/events/{event}/purchase-ticket', [EventController::class, 'purchaseTicket']);
 });
 
 
