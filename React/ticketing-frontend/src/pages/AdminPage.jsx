@@ -8,29 +8,32 @@ import AdminUserCreate from '../components/AdminUserCreate';
 import http from '../utils/http';
 import { useAuth } from '../services/AuthContext';
 import { useNavigate } from "react-router-dom";
+import TicketAnalytics from '../components/TicketAnalytics';
 
 
 const AdminPage = () => {
   const [events, setEvents] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [openTicketDialog, setOpenTicketDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [tabValue, setTabValue] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
   const { user, isAuthenticated, checkAuth } = useAuth();
   const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isAuthenticated) {
-            checkAuth().then(auth => {
-                if (!auth || user.isAdmin !== 1) {
-                    navigate('/login');
-                }
-            });
-        } else if (user.isAdmin !== 1) {
-            navigate('/login');
+  useEffect(() => {
+    if (!isAuthenticated) {
+      checkAuth().then(auth => {
+        if (!auth || user.isAdmin !== 1) {
+          navigate('/login');
         }
-    }, [isAuthenticated, checkAuth, navigate, user]);
+      });
+    } else if (user.isAdmin !== 1) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, checkAuth, navigate, user]);
 
   const getEvents = async () => {
     try {
@@ -41,8 +44,18 @@ const AdminPage = () => {
     }
   }
 
+  const getOrders = async () => {
+    try {
+      const { data } = await http.get('api/orders');
+      setOrders(data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  }
+
   useEffect(() => {
     getEvents();
+    getOrders();
   }, [])
 
   const handleEventSubmit = async (newEvent) => {
@@ -97,6 +110,10 @@ const AdminPage = () => {
     setTabValue(newValue);
   };
 
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+  };
+
   return (
     <Box sx={{ maxWidth: 800, margin: 'auto', padding: 2 }}>
       <Typography variant="h4" gutterBottom>
@@ -106,6 +123,7 @@ const AdminPage = () => {
       <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 2 }}>
         <Tab label="Manage Events" />
         <Tab label="Register Admin" />
+        <Tab label="Ticket Analytics" />
       </Tabs>
 
       {tabValue === 0 && (
@@ -116,6 +134,8 @@ const AdminPage = () => {
             onAddTicket={handleOpenTicketDialog}
             onEditEvent={handleOpenEditDialog}
             onDeleteEvent={handleDeleteEvent}
+            searchTerm={searchTerm}
+            onSearchChange={handleSearchChange}
           />
           <TicketDialog
             open={openTicketDialog}
@@ -134,6 +154,9 @@ const AdminPage = () => {
 
       {tabValue === 1 && (
         <AdminUserCreate />
+      )}
+      {tabValue === 2 && (
+        <TicketAnalytics orders={orders} events={events} />
       )}
     </Box>
   );
