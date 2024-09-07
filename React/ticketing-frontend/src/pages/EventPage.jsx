@@ -41,9 +41,30 @@ const EventPage = () => {
   };
 
   const handlePurchase = async () => {
-    // Implement purchase logic here
-    console.log('Purchase tickets:', ticketQuantities);
+    setError('');
+    try {
+      const purchases = Object.entries(ticketQuantities)
+        .filter(([_, quantity]) => quantity > 0)
+        .map(async ([ticketTypeId, quantity]) => {
+          const response = await http.post(`/api/events/${id}/purchase-ticket`, {
+            ticket_type_id: ticketTypeId,
+            quantity: quantity,
+          });
+          return response.data.message;
+        });
+  
+      const results = await Promise.all(purchases);
+      alert(results.join('\n'));
+      fetchEvent(); // Refresh event data after purchase
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.error || 'An error occurred while processing your purchase.');
+      } else {
+        setError('An error occurred while processing your purchase.');
+      }
+    }
   };
+  
 
   if (!event) return <Typography>Loading... </Typography>;
 
