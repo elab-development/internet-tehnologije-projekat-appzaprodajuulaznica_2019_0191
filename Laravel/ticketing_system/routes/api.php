@@ -30,6 +30,8 @@ Route::resource('/users', UserController::class);
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('ticket-types', TicketTypeController::class);
+    Route::apiResource('orders', OrderController::class);
     Route::get('adminevents', [EventController::class, 'adminIndex']);
     Route::post('events/{id}/tickets', [EventController::class, 'addTicket']);
     Route::put('events/{id}', [EventController::class, 'update']);

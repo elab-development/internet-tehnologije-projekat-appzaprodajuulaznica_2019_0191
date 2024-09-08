@@ -45,11 +45,11 @@ class ProcessTicketPurchase implements ShouldQueue
 
                 DB::commit();
                 Log::info("Ticket purchase successful for user {$this->user->email}");
-                // Notify user of success (you can implement this later)
+                // Notify user of success
             } else {
                 DB::rollBack();
                 Log::warning("Not enough tickets available for user {$this->user->email}");
-                // Handle "not enough tickets" case (you can implement this later)
+                // Handle "not enough tickets"
             }
         } catch (\Exception $e) {
             DB::rollBack();
