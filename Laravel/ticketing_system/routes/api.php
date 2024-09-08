@@ -6,6 +6,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketTypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,12 +26,10 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 Route::get('events/{id}', [EventController::class, 'show']);
 Route::post('events', [EventController::class, 'store']);
 Route::get('user', [EventController::class, 'user']);
+Route::resource('/users', UserController::class);
 
 
 Route::middleware('auth:sanctum')->group(function () {
-
-    Route::apiResource('ticket-types', TicketTypeController::class);
-    Route::apiResource('orders', OrderController::class);
     Route::get('adminevents', [EventController::class, 'adminIndex']);
     Route::post('events/{id}/tickets', [EventController::class, 'addTicket']);
     Route::put('events/{id}', [EventController::class, 'update']);
