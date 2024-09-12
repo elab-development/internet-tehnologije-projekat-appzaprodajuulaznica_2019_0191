@@ -27,7 +27,6 @@ const Login = () => {
     try {
       const response = await http.post('api/login', logInData);
       login(response.data.user, response.data.access_token);
-      console.log('User logged in:', response.data.user);
       setNotification({
         open: true,
         message: 'Login successful!',
