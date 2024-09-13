@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Typography, 
-  TextField, 
-  Button, 
-  Container, 
-  Avatar,
-  Link,
-  Snackbar,
-  Alert
-} from '@mui/material';
+import { Box, Typography, TextField, Button, Container, Avatar, Link, Snackbar, Alert} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import http from '../utils/http';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +37,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       if(validateForm()){
-        const response = await http.post('/api/register', formData);  
+         await http.post('/api/register', formData);  
           setNotification({
             open: true,
             message: 'Registration successful! You can now log in.',

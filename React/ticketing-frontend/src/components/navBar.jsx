@@ -1,11 +1,11 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Toolbar, Button } from '@mui/material';
 import {Link} from 'react-router-dom';
 import { useAuth } from '../services/AuthContext';
-import http from '../utils/http';
+
 
 const Navbar = () => {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();

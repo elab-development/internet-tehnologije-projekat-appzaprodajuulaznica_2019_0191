@@ -410,14 +410,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/events/ullam" \
+    -G "http://localhost/api/events/repellat" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/ullam"
+    "http://localhost/api/events/repellat"
 );
 
 let headers = {
@@ -437,7 +437,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Models\\Event] ullam",
+    "message": "No query results for model [App\\Models\\Event] repellat",
     "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
     "file": "C:\\xampp\\htdocs\\ticketSale\\internet-tehnologije-projekat-appzaprodajuulaznica_2019_0191\\Laravel\\ticketing_system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
     "line": 385,
@@ -1166,14 +1166,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/users/facere" \
+    -G "http://localhost/api/users/sit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/facere"
+    "http://localhost/api/users/sit"
 );
 
 let headers = {
@@ -1193,7 +1193,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Models\\User] facere",
+    "message": "No query results for model [App\\Models\\User] sit",
     "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
     "file": "C:\\xampp\\htdocs\\ticketSale\\internet-tehnologije-projekat-appzaprodajuulaznica_2019_0191\\Laravel\\ticketing_system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
     "line": 385,
@@ -1631,14 +1631,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/users/reprehenderit/edit" \
+    -G "http://localhost/api/users/voluptas/edit" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/reprehenderit/edit"
+    "http://localhost/api/users/voluptas/edit"
 );
 
 let headers = {
@@ -1658,7 +1658,7 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Models\\User] reprehenderit",
+    "message": "No query results for model [App\\Models\\User] voluptas",
     "exception": "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
     "file": "C:\\xampp\\htdocs\\ticketSale\\internet-tehnologije-projekat-appzaprodajuulaznica_2019_0191\\Laravel\\ticketing_system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php",
     "line": 385,
@@ -2096,14 +2096,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/users/quisquam" \
+    "http://localhost/api/users/enim" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/quisquam"
+    "http://localhost/api/users/enim"
 );
 
 let headers = {
@@ -2161,14 +2161,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/users/laborum" \
+    "http://localhost/api/users/natus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/users/laborum"
+    "http://localhost/api/users/natus"
 );
 
 let headers = {
@@ -2337,14 +2337,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/ticket-types/et" \
+    -G "http://localhost/api/ticket-types/dolor" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/ticket-types/et"
+    "http://localhost/api/ticket-types/dolor"
 );
 
 let headers = {
@@ -2405,14 +2405,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/ticket-types/error" \
+    "http://localhost/api/ticket-types/sed" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/ticket-types/error"
+    "http://localhost/api/ticket-types/sed"
 );
 
 let headers = {
@@ -2470,14 +2470,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/ticket-types/ea" \
+    "http://localhost/api/ticket-types/accusantium" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/ticket-types/ea"
+    "http://localhost/api/ticket-types/accusantium"
 );
 
 let headers = {
@@ -2646,14 +2646,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/orders/et" \
+    -G "http://localhost/api/orders/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/et"
+    "http://localhost/api/orders/aut"
 );
 
 let headers = {
@@ -2714,14 +2714,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/orders/eveniet" \
+    "http://localhost/api/orders/ea" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/eveniet"
+    "http://localhost/api/orders/ea"
 );
 
 let headers = {
@@ -2779,14 +2779,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/orders/voluptatem" \
+    "http://localhost/api/orders/eum" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/orders/voluptatem"
+    "http://localhost/api/orders/eum"
 );
 
 let headers = {
@@ -2901,14 +2901,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/est/tickets" \
+    "http://localhost/api/events/quos/tickets" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/est/tickets"
+    "http://localhost/api/events/quos/tickets"
 );
 
 let headers = {
@@ -2962,14 +2962,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/events/perferendis" \
+    "http://localhost/api/events/consequuntur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/perferendis"
+    "http://localhost/api/events/consequuntur"
 );
 
 let headers = {
@@ -3023,14 +3023,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/events/nostrum" \
+    "http://localhost/api/events/aut" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/nostrum"
+    "http://localhost/api/events/aut"
 );
 
 let headers = {
@@ -3206,14 +3206,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/eos/tickets" \
+    "http://localhost/api/events/repellat/tickets" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/eos/tickets"
+    "http://localhost/api/events/repellat/tickets"
 );
 
 let headers = {
@@ -3267,14 +3267,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/tickets/voluptates" \
+    -G "http://localhost/api/tickets/alias" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tickets/voluptates"
+    "http://localhost/api/tickets/alias"
 );
 
 let headers = {
@@ -3335,14 +3335,14 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/tickets/aut" \
+    "http://localhost/api/tickets/odio" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tickets/aut"
+    "http://localhost/api/tickets/odio"
 );
 
 let headers = {
@@ -3396,14 +3396,14 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/tickets/aspernatur" \
+    "http://localhost/api/tickets/unde" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tickets/aspernatur"
+    "http://localhost/api/tickets/unde"
 );
 
 let headers = {
@@ -3457,14 +3457,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/events/provident/purchase-ticket" \
+    "http://localhost/api/events/magnam/purchase-ticket" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/events/provident/purchase-ticket"
+    "http://localhost/api/events/magnam/purchase-ticket"
 );
 
 let headers = {

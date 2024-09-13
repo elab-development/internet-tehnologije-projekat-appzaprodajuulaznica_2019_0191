@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../services/AuthContext'
 import http from '../utils/http';
-import Log from '../components/log';
 import { Typography, Button, Box, Container, TextField, Snackbar, Alert } from '@mui/material';
 
 const Login = () => {
